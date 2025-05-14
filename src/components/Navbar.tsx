@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X, Keyboard, Volume2, VolumeX } from "lucide-react";
+import { useSoundContext } from "@/context/SoundContext";
 
 interface NavbarProps {
   openCommandPalette: () => void;
@@ -9,13 +10,27 @@ interface NavbarProps {
 
 const Navbar = ({ openCommandPalette }: NavbarProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [hidden, setHidden] = useState(false);
   const location = useLocation();
+  const { soundEnabled, toggleSound, playSound } = useSoundContext();
 
-  const toggleSound = () => {
-    setSoundEnabled(!soundEnabled);
+  const handleToggleSound = () => {
+    toggleSound();
+  };
+
+  const handleLinkClick = () => {
+    playSound('click');
+  };
+
+  const handleMenuToggle = () => {
+    playSound('click');
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleCommandPalette = () => {
+    playSound('click');
+    openCommandPalette();
   };
 
   useEffect(() => {
@@ -59,6 +74,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
           <NavLink 
             to="/" 
             className="text-xl sm:text-2xl font-orbitron font-bold tracking-wider text-white text-glow"
+            onClick={handleLinkClick}
           >
             DEV<span className="text-neon-blue">PORTFOLIO</span>
           </NavLink>
@@ -69,6 +85,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
               <NavLink
                 key={link.path}
                 to={link.path}
+                onClick={handleLinkClick}
                 className={({ isActive }) =>
                   `px-3 py-2 text-sm font-medium transition-colors duration-200 relative group ${
                     isActive 
@@ -86,7 +103,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
           {/* Action buttons */}
           <div className="hidden md:flex items-center ml-4 space-x-4">
             <button 
-              onClick={openCommandPalette}
+              onClick={handleCommandPalette}
               className="flex items-center text-sm text-gray-400 hover:text-white transition-colors"
             >
               <Keyboard className="h-4 w-4 mr-1" />
@@ -94,7 +111,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
             </button>
             
             <button 
-              onClick={toggleSound}
+              onClick={handleToggleSound}
               className="text-gray-400 hover:text-white transition-colors"
               aria-label={soundEnabled ? "Disable sound" : "Enable sound"}
             >
@@ -104,7 +121,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
           
           {/* Mobile menu button */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={handleMenuToggle}
             className="md:hidden text-gray-400 hover:text-white transition-colors"
             aria-label="Toggle menu"
           >
@@ -123,6 +140,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
               <NavLink
                 key={link.path}
                 to={link.path}
+                onClick={handleLinkClick}
                 className={({ isActive }) =>
                   `block px-3 py-2 text-base font-medium ${
                     isActive ? "text-neon-blue" : "text-gray-300"
@@ -135,7 +153,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
             
             <div className="flex items-center justify-between pt-2 mt-2 border-t border-dark-border">
               <button 
-                onClick={openCommandPalette}
+                onClick={handleCommandPalette}
                 className="flex items-center text-sm text-gray-400"
               >
                 <Keyboard className="h-4 w-4 mr-1" />
@@ -143,7 +161,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
               </button>
               
               <button 
-                onClick={toggleSound}
+                onClick={handleToggleSound}
                 className="text-gray-400"
                 aria-label={soundEnabled ? "Disable sound" : "Enable sound"}
               >
