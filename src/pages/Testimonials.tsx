@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { MessageSquare } from 'lucide-react';
+import AnimatedSection from '@/components/AnimatedSection';
 
 interface Testimonial {
   id: number;
@@ -59,7 +60,7 @@ const Testimonials = () => {
   
   return (
     <section className="py-12">
-      <div className="text-center mb-12">
+      <AnimatedSection transitionType="slide-up" className="text-center mb-12">
         <h2 className="text-base sm:text-lg text-neon-blue font-medium mb-2">
           SYSTEM LOGS
         </h2>
@@ -69,15 +70,15 @@ const Testimonials = () => {
         <p className="text-gray-400 max-w-2xl mx-auto">
           Feedback from clients and colleagues who have experienced working with me firsthand.
         </p>
-      </div>
+      </AnimatedSection>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+        <AnimatedSection transitionType="slide-left" className="lg:col-span-2">
           {/* Main testimonial display */}
           {testimonials.map((testimonial) => (
             <div 
               key={testimonial.id}
-              className={`bg-dark-card border rounded-lg p-6 transition-all duration-300 ${
+              className={`bg-dark-card border rounded-lg p-6 transition-all duration-500 ${
                 activeTestimonial === testimonial.id
                   ? 'border-neon-blue border-glow scale-100 opacity-100'
                   : 'border-dark-border scale-95 opacity-0 hidden'
@@ -103,7 +104,7 @@ const Testimonials = () => {
                 </div>
               </div>
               
-              <div className="mt-6 terminal-text">
+              <AnimatedSection transitionType="fade" delay={200} className="mt-6 terminal-text">
                 <div className="mb-2 text-gray-500">
                   <span className="text-neon-blue">$</span> cat testimonial.txt
                 </div>
@@ -115,7 +116,7 @@ const Testimonials = () => {
                 <div className="mt-2 text-gray-500">
                   <span className="text-neon-blue">$</span> _
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
           ))}
           
@@ -134,44 +135,45 @@ const Testimonials = () => {
               />
             ))}
           </div>
-        </div>
+        </AnimatedSection>
         
-        <div>
+        <AnimatedSection transitionType="slide-right" delay={300}>
           {/* Testimonial selection */}
           <div className="bg-dark-card border border-dark-border rounded-lg p-4">
             <h3 className="text-lg font-orbitron text-white mb-4 border-b border-dark-border pb-3">SELECT TESTIMONIAL</h3>
             
             <div className="space-y-3">
-              {testimonials.map((testimonial) => (
-                <button
-                  key={`select-${testimonial.id}`}
-                  onClick={() => setActiveTestimonial(testimonial.id)}
-                  className={`w-full text-left p-3 rounded flex items-center transition-colors ${
-                    activeTestimonial === testimonial.id
-                      ? 'bg-dark-lighter border border-neon-blue'
-                      : 'border border-dark-border hover:border-neon-blue'
-                  }`}
-                >
-                  <img 
-                    src={testimonial.avatar} 
-                    alt={testimonial.name} 
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <div className="ml-3">
-                    <p className={`font-medium ${
-                      activeTestimonial === testimonial.id ? 'text-white' : 'text-gray-300'
-                    }`}>
-                      {testimonial.name}
-                    </p>
-                    <p className="text-xs text-gray-500">{testimonial.company}</p>
-                  </div>
-                </button>
+              {testimonials.map((testimonial, index) => (
+                <AnimatedSection key={`select-${testimonial.id}`} delay={400 + index * 100} transitionType="slide-right">
+                  <button
+                    onClick={() => setActiveTestimonial(testimonial.id)}
+                    className={`w-full text-left p-3 rounded flex items-center transition-colors ${
+                      activeTestimonial === testimonial.id
+                        ? 'bg-dark-lighter border border-neon-blue'
+                        : 'border border-dark-border hover:border-neon-blue'
+                    }`}
+                  >
+                    <img 
+                      src={testimonial.avatar} 
+                      alt={testimonial.name} 
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                    <div className="ml-3">
+                      <p className={`font-medium ${
+                        activeTestimonial === testimonial.id ? 'text-white' : 'text-gray-300'
+                      }`}>
+                        {testimonial.name}
+                      </p>
+                      <p className="text-xs text-gray-500">{testimonial.company}</p>
+                    </div>
+                  </button>
+                </AnimatedSection>
               ))}
             </div>
           </div>
           
           {/* Collaboration info */}
-          <div className="mt-6 bg-dark-card border border-dark-border rounded-lg p-6">
+          <AnimatedSection transitionType="zoom" delay={800} className="mt-6 bg-dark-card border border-dark-border rounded-lg p-6">
             <h3 className="text-lg font-orbitron text-white mb-4">COLLABORATION STATS</h3>
             
             <div className="space-y-4">
@@ -181,7 +183,7 @@ const Testimonials = () => {
                   <span className="text-neon-blue">98%</span>
                 </div>
                 <div className="w-full bg-dark-border h-2 rounded-full overflow-hidden">
-                  <div className="h-full bg-neon-blue w-[98%]"></div>
+                  <div className="h-full bg-neon-blue w-0 transition-all duration-1000" style={{ width: '98%' }}></div>
                 </div>
               </div>
               
@@ -191,7 +193,7 @@ const Testimonials = () => {
                   <span className="text-neon-blue">95%</span>
                 </div>
                 <div className="w-full bg-dark-border h-2 rounded-full overflow-hidden">
-                  <div className="h-full bg-neon-blue w-[95%]"></div>
+                  <div className="h-full bg-neon-blue w-0 transition-all duration-1000" style={{ width: '95%', transitionDelay: '0.2s' }}></div>
                 </div>
               </div>
               
@@ -201,12 +203,12 @@ const Testimonials = () => {
                   <span className="text-neon-blue">92%</span>
                 </div>
                 <div className="w-full bg-dark-border h-2 rounded-full overflow-hidden">
-                  <div className="h-full bg-neon-blue w-[92%]"></div>
+                  <div className="h-full bg-neon-blue w-0 transition-all duration-1000" style={{ width: '92%', transitionDelay: '0.4s' }}></div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </AnimatedSection>
+        </AnimatedSection>
       </div>
     </section>
   );

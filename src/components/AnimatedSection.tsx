@@ -1,13 +1,22 @@
 
 import React, { useEffect, useRef } from 'react';
+import { cn } from '@/lib/utils';
+
+export type TransitionType = 'fade' | 'slide-up' | 'slide-left' | 'slide-right' | 'zoom' | 'rotate';
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  transitionType?: TransitionType;
 }
 
-const AnimatedSection = ({ children, className = '', delay = 0 }: AnimatedSectionProps) => {
+const AnimatedSection = ({ 
+  children, 
+  className = '', 
+  delay = 0,
+  transitionType = 'fade'
+}: AnimatedSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -19,6 +28,7 @@ const AnimatedSection = ({ children, className = '', delay = 0 }: AnimatedSectio
         if (entry.isIntersecting) {
           setTimeout(() => {
             section.classList.add('animate-section-visible');
+            section.dataset.visible = 'true';
           }, delay);
           observer.unobserve(section);
         }
@@ -32,10 +42,28 @@ const AnimatedSection = ({ children, className = '', delay = 0 }: AnimatedSectio
     };
   }, [delay]);
   
+  const getTransitionClass = () => {
+    switch (transitionType) {
+      case 'slide-up':
+        return 'transition-slide-up';
+      case 'slide-left':
+        return 'transition-slide-left';
+      case 'slide-right':
+        return 'transition-slide-right';
+      case 'zoom':
+        return 'transition-zoom';
+      case 'rotate':
+        return 'transition-rotate';
+      case 'fade':
+      default:
+        return 'transition-fade';
+    }
+  };
+  
   return (
     <div 
       ref={sectionRef} 
-      className={`animate-section ${className}`}
+      className={cn(`animate-section ${getTransitionClass()}`, className)}
     >
       {children}
     </div>

@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import AnimatedSection from '@/components/AnimatedSection';
 
 interface ExperienceItem {
   id: number;
@@ -68,7 +69,7 @@ const Experience = () => {
 
   return (
     <section className="py-12">
-      <div className="text-center mb-12">
+      <AnimatedSection transitionType="slide-up" className="text-center mb-12">
         <h2 className="text-base sm:text-lg text-neon-cyan font-medium mb-2">
           WARP DRIVE LOG
         </h2>
@@ -78,42 +79,43 @@ const Experience = () => {
         <p className="text-gray-400 max-w-2xl mx-auto">
           A chronological record of my professional experience and career milestones.
         </p>
-      </div>
+      </AnimatedSection>
       
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Timeline navigation */}
-        <div className="lg:w-1/3">
+        <AnimatedSection transitionType="slide-left" className="lg:w-1/3">
           <div className="sticky top-20">
             <div className="bg-dark-card border border-dark-border rounded-lg p-4">
               <h3 className="text-lg font-orbitron text-white mb-4 border-b border-dark-border pb-3">TIMELINE ACCESS</h3>
               
               <div className="space-y-1">
-                {experienceData.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveExperience(item.id)}
-                    className={`w-full text-left p-3 rounded transition-colors flex items-center ${
-                      activeExperience === item.id
-                        ? 'bg-dark-lighter text-neon-cyan'
-                        : 'text-gray-400 hover:text-white hover:bg-dark-lighter/50'
-                    }`}
-                  >
-                    <div className={`w-1 h-12 mr-3 rounded ${
-                      activeExperience === item.id ? 'bg-neon-cyan' : 'bg-dark-border'
-                    }`}></div>
-                    <div>
-                      <p className={`font-medium ${activeExperience === item.id ? 'text-white' : ''}`}>{item.role}</p>
-                      <p className="text-sm">{item.period}</p>
-                    </div>
-                  </button>
+                {experienceData.map((item, index) => (
+                  <AnimatedSection delay={index * 100} key={item.id}>
+                    <button
+                      onClick={() => setActiveExperience(item.id)}
+                      className={`w-full text-left p-3 rounded transition-colors flex items-center ${
+                        activeExperience === item.id
+                          ? 'bg-dark-lighter text-neon-cyan'
+                          : 'text-gray-400 hover:text-white hover:bg-dark-lighter/50'
+                      }`}
+                    >
+                      <div className={`w-1 h-12 mr-3 rounded ${
+                        activeExperience === item.id ? 'bg-neon-cyan' : 'bg-dark-border'
+                      }`}></div>
+                      <div>
+                        <p className={`font-medium ${activeExperience === item.id ? 'text-white' : ''}`}>{item.role}</p>
+                        <p className="text-sm">{item.period}</p>
+                      </div>
+                    </button>
+                  </AnimatedSection>
                 ))}
               </div>
             </div>
           </div>
-        </div>
+        </AnimatedSection>
         
         {/* Experience details */}
-        <div className="lg:w-2/3">
+        <AnimatedSection transitionType="slide-right" className="lg:w-2/3">
           <div className="bg-dark-card border border-dark-border rounded-lg p-6">
             <div className="mb-6">
               <h3 className="text-2xl font-orbitron text-white mb-1">{selectedExperience.role}</h3>
@@ -125,30 +127,35 @@ const Experience = () => {
               
               <div className="space-y-4 mb-8">
                 {selectedExperience.description.map((desc, index) => (
-                  <div key={index} className="flex">
-                    <span className="text-neon-cyan mr-2">»</span>
-                    <p className="text-gray-300">{desc}</p>
-                  </div>
+                  <AnimatedSection key={index} delay={index * 100} transitionType="fade">
+                    <div className="flex">
+                      <span className="text-neon-cyan mr-2">»</span>
+                      <p className="text-gray-300">{desc}</p>
+                    </div>
+                  </AnimatedSection>
                 ))}
               </div>
               
-              <div className="border-t border-dark-border pt-5">
-                <h4 className="text-sm uppercase text-gray-500 mb-3">Technologies Used</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedExperience.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 text-sm bg-dark-lighter border border-dark-border rounded-md text-gray-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              <AnimatedSection transitionType="slide-up" delay={300}>
+                <div className="border-t border-dark-border pt-5">
+                  <h4 className="text-sm uppercase text-gray-500 mb-3">Technologies Used</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedExperience.technologies.map((tech, index) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 text-sm bg-dark-lighter border border-dark-border rounded-md text-gray-300"
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
             
             {/* Visual timeline */}
-            <div className="mt-12 pt-6 border-t border-dark-border">
+            <AnimatedSection transitionType="zoom" delay={400} className="mt-12 pt-6 border-t border-dark-border">
               <h4 className="text-sm uppercase text-gray-500 mb-4">Career Progress</h4>
               <div className="relative h-2 bg-dark-border rounded-full overflow-hidden">
                 {experienceData.map((item, index) => {
@@ -190,10 +197,10 @@ const Experience = () => {
                 <span>2016</span>
                 <span>2023</span>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
           
-          <div className="mt-8 bg-dark-card border border-dark-border rounded-lg p-6">
+          <AnimatedSection transitionType="slide-up" delay={500} className="mt-8 bg-dark-card border border-dark-border rounded-lg p-6">
             <h3 className="text-lg font-orbitron text-white mb-4">EDUCATION</h3>
             
             <div className="mb-6 pb-6 border-b border-dark-border">
@@ -212,22 +219,28 @@ const Experience = () => {
             <div>
               <h4 className="text-lg text-white mb-1">Key Certifications</h4>
               <ul className="space-y-2 text-gray-400">
-                <li className="flex items-center">
-                  <span className="text-neon-cyan mr-2">»</span>
-                  AWS Certified Solutions Architect
-                </li>
-                <li className="flex items-center">
-                  <span className="text-neon-cyan mr-2">»</span>
-                  Google Cloud Professional Developer
-                </li>
-                <li className="flex items-center">
-                  <span className="text-neon-cyan mr-2">»</span>
-                  MongoDB Certified Developer
-                </li>
+                <AnimatedSection delay={600} transitionType="slide-left">
+                  <li className="flex items-center">
+                    <span className="text-neon-cyan mr-2">»</span>
+                    AWS Certified Solutions Architect
+                  </li>
+                </AnimatedSection>
+                <AnimatedSection delay={700} transitionType="slide-left">
+                  <li className="flex items-center">
+                    <span className="text-neon-cyan mr-2">»</span>
+                    Google Cloud Professional Developer
+                  </li>
+                </AnimatedSection>
+                <AnimatedSection delay={800} transitionType="slide-left">
+                  <li className="flex items-center">
+                    <span className="text-neon-cyan mr-2">»</span>
+                    MongoDB Certified Developer
+                  </li>
+                </AnimatedSection>
               </ul>
             </div>
-          </div>
-        </div>
+          </AnimatedSection>
+        </AnimatedSection>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { Github, Globe, ArrowRight } from 'lucide-react';
+import AnimatedSection from '@/components/AnimatedSection';
 
 interface Project {
   id: number;
@@ -86,7 +87,7 @@ const Projects = () => {
   
   return (
     <section className="py-12">
-      <div className="text-center mb-12">
+      <AnimatedSection transitionType="slide-up" className="text-center mb-12">
         <h2 className="text-base sm:text-lg text-neon-purple font-medium mb-2">
           MISSION LOGS
         </h2>
@@ -119,86 +120,91 @@ const Projects = () => {
             FEATURED ONLY
           </button>
         </div>
-      </div>
+      </AnimatedSection>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProjects.map((project) => (
-          <div 
-            key={project.id}
-            className="relative group"
-            onMouseEnter={() => setHoveredProject(project.id)}
-            onMouseLeave={() => setHoveredProject(null)}
+        {filteredProjects.map((project, index) => (
+          <AnimatedSection 
+            key={project.id} 
+            delay={index * 100}
+            transitionType={index % 3 === 0 ? 'slide-left' : index % 3 === 1 ? 'zoom' : 'slide-right'}
           >
             <div 
-              className={`bg-dark-card border rounded-lg overflow-hidden transition-all duration-300 ${
-                hoveredProject === project.id 
-                  ? 'border-neon-purple border-glow-purple' 
-                  : 'border-dark-border'
-              }`}
+              className="relative group"
+              onMouseEnter={() => setHoveredProject(project.id)}
+              onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-orbitron text-white mb-2">{project.title}</h3>
-                <p className="text-gray-400 text-sm mb-4">{project.description}</p>
-                
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tech.map((tech) => (
-                    <span 
-                      key={tech} 
-                      className="px-2 py-1 text-xs bg-dark-lighter border border-dark-border rounded-md text-gray-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              <div 
+                className={`bg-dark-card border rounded-lg overflow-hidden transition-all duration-300 ${
+                  hoveredProject === project.id 
+                    ? 'border-neon-purple border-glow-purple' 
+                    : 'border-dark-border'
+                }`}
+              >
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                 </div>
                 
-                <div className="flex justify-between items-center">
-                  <div className="flex space-x-3">
-                    <a 
-                      href={project.githubUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-md border border-dark-border hover:border-neon-purple text-gray-400 hover:text-white transition-colors"
-                    >
-                      <Github className="h-4 w-4" />
-                    </a>
+                <div className="p-6">
+                  <h3 className="text-xl font-orbitron text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-400 text-sm mb-4">{project.description}</p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {project.tech.map((tech) => (
+                      <span 
+                        key={tech} 
+                        className="px-2 py-1 text-xs bg-dark-lighter border border-dark-border rounded-md text-gray-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="flex justify-between items-center">
+                    <div className="flex space-x-3">
+                      <a 
+                        href={project.githubUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-md border border-dark-border hover:border-neon-purple text-gray-400 hover:text-white transition-colors"
+                      >
+                        <Github className="h-4 w-4" />
+                      </a>
+                      <a 
+                        href={project.liveUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-md border border-dark-border hover:border-neon-purple text-gray-400 hover:text-white transition-colors"
+                      >
+                        <Globe className="h-4 w-4" />
+                      </a>
+                    </div>
+                    
                     <a 
                       href={project.liveUrl} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="p-2 rounded-md border border-dark-border hover:border-neon-purple text-gray-400 hover:text-white transition-colors"
+                      className="flex items-center text-sm text-neon-purple hover:underline"
                     >
-                      <Globe className="h-4 w-4" />
+                      <span>View Project</span>
+                      <ArrowRight className="h-3 w-3 ml-1" />
                     </a>
                   </div>
-                  
-                  <a 
-                    href={project.liveUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center text-sm text-neon-purple hover:underline"
-                  >
-                    <span>View Project</span>
-                    <ArrowRight className="h-3 w-3 ml-1" />
-                  </a>
                 </div>
               </div>
+              
+              {/* Project status indicator */}
+              {project.featured && (
+                <div className="absolute top-3 right-3 bg-neon-purple text-white text-xs px-2 py-1 rounded-md">
+                  FEATURED
+                </div>
+              )}
             </div>
-            
-            {/* Project status indicator */}
-            {project.featured && (
-              <div className="absolute top-3 right-3 bg-neon-purple text-white text-xs px-2 py-1 rounded-md">
-                FEATURED
-              </div>
-            )}
-          </div>
+          </AnimatedSection>
         ))}
       </div>
     </section>

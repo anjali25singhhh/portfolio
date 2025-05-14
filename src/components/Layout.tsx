@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { CommandPalette } from "./CommandPalette";
@@ -9,6 +9,19 @@ import ParticleBackground from "./ParticleBackground";
 const Layout = () => {
   const [showCommandPalette, setShowCommandPalette] = useState(false);
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const [displayLocation, setDisplayLocation] = useState(location);
+  const [transitionStage, setTransitionStage] = useState("fadeIn");
+  
+  useEffect(() => {
+    if (location !== displayLocation) {
+      setTransitionStage("fadeOut");
+      setTimeout(() => {
+        setDisplayLocation(location);
+        setTransitionStage("fadeIn");
+      }, 300);
+    }
+  }, [location, displayLocation]);
   
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -36,7 +49,9 @@ const Layout = () => {
         <div className="absolute top-1/2 right-1/3 w-72 h-72 bg-neon-pink/20 rounded-full filter blur-[100px] animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
       
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-24">
+      <main className={`flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-24 transition-opacity duration-300 ${
+        transitionStage === "fadeIn" ? "opacity-100" : "opacity-0"
+      }`}>
         <div className="ov-hidden">
           <Outlet />
         </div>
