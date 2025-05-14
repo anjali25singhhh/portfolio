@@ -108,6 +108,80 @@
   .typing-text {
     @apply whitespace-nowrap overflow-hidden border-r-4 animate-typing animate-blink;
   }
+  
+  /* New animated sections */
+  .animate-section {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+  
+  .animate-section-visible {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .skill-card {
+    @apply transition-all duration-300 hover:scale-105 hover:rotate-1;
+  }
+  
+  .cyber-line {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-neon-blue to-transparent my-6 relative overflow-hidden;
+  }
+  
+  .cyber-line::after {
+    content: '';
+    @apply absolute top-0 left-0 h-full w-10 bg-neon-blue opacity-70;
+    animation: cyber-line-scan 3s linear infinite;
+  }
+  
+  .glitch-hover {
+    position: relative;
+    transition: all 0.2s ease;
+  }
+  
+  .glitch-hover::before, 
+  .glitch-hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.2s ease;
+  }
+  
+  .glitch-hover::before {
+    left: -2px;
+    text-shadow: 2px 0 #00f0ff;
+    clip: rect(44px, 450px, 56px, 0);
+  }
+  
+  .glitch-hover::after {
+    left: 2px;
+    text-shadow: -2px 0 #d946ef;
+    clip: rect(44px, 450px, 46px, 0);
+  }
+  
+  .glitch-hover:hover::before,
+  .glitch-hover:hover::after {
+    opacity: 0.5;
+    animation: glitch-animation 2s infinite linear alternate-reverse;
+  }
+  
+  .scan-line {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.5), transparent);
+    animation: scan-animation 2s linear infinite;
+  }
 }
 
 @layer utilities {
@@ -118,5 +192,99 @@
 
   .scrollbar-hidden::-webkit-scrollbar {
     display: none;
+  }
+  
+  .clip-triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+  
+  .clip-hexagon {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  }
+}
+
+@keyframes cyber-line-scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(1000%);
+  }
+}
+
+@keyframes glitch-animation {
+  0% {
+    clip: rect(29px, 9999px, 30px, 0);
+  }
+  10% {
+    clip: rect(36px, 9999px, 76px, 0);
+  }
+  20% {
+    clip: rect(25px, 9999px, 47px, 0);
+  }
+  30% {
+    clip: rect(82px, 9999px, 78px, 0);
+  }
+  40% {
+    clip: rect(36px, 9999px, 1px, 0);
+  }
+  50% {
+    clip: rect(10px, 9999px, 75px, 0);
+  }
+  60% {
+    clip: rect(30px, 9999px, 9px, 0);
+  }
+  70% {
+    clip: rect(45px, 9999px, 56px, 0);
+  }
+  80% {
+    clip: rect(10px, 9999px, 85px, 0);
+  }
+  90% {
+    clip: rect(96px, 9999px, 59px, 0);
+  }
+  100% {
+    clip: rect(37px, 9999px, 68px, 0);
+  }
+}
+
+@keyframes scan-animation {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes float-vertical {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes radar-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
   }
 }

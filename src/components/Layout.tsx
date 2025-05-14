@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { CommandPalette } from "./CommandPalette";
+import ParticleBackground from "./ParticleBackground";
 
 const Layout = () => {
   const [showCommandPalette, setShowCommandPalette] = useState(false);
@@ -25,6 +26,9 @@ const Layout = () => {
     <div className="min-h-screen flex flex-col bg-dark text-white relative overflow-hidden">
       <Navbar openCommandPalette={() => setShowCommandPalette(true)} />
       
+      {/* Particle background */}
+      <ParticleBackground />
+      
       {/* Animated background elements */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-blue/20 rounded-full filter blur-[100px] animate-float"></div>
@@ -39,7 +43,8 @@ const Layout = () => {
       </main>
       
       {/* Footer */}
-      <footer className="py-6 border-t border-dark-border">
+      <footer className="py-6 border-t border-dark-border relative overflow-hidden">
+        <div className="cyber-line"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center text-sm text-gray-500">
           <p className="mb-2 flex items-center justify-center gap-1">
             <span className="inline-block w-2 h-2 rounded-full bg-neon-blue animate-pulse"></span> 
