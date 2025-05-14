@@ -1,8 +1,15 @@
 
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Menu, X, Keyboard, Volume2, VolumeX } from "lucide-react";
+import { Menu, X, Keyboard, Volume2, VolumeX, Download } from "lucide-react";
 import { useSoundContext } from "@/context/SoundContext";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface NavbarProps {
   openCommandPalette: () => void;
@@ -13,10 +20,15 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [hidden, setHidden] = useState(false);
   const location = useLocation();
-  const { soundEnabled, toggleSound, playSound } = useSoundContext();
+  const { soundEnabled, toggleSound, playSound, downloadSounds, isSoundsLoaded } = useSoundContext();
 
   const handleToggleSound = () => {
     toggleSound();
+  };
+
+  const handleDownloadSounds = () => {
+    playSound('click');
+    downloadSounds();
   };
 
   const handleLinkClick = () => {
@@ -110,13 +122,39 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
               <span>Cmd+K</span>
             </button>
             
-            <button 
-              onClick={handleToggleSound}
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label={soundEnabled ? "Disable sound" : "Enable sound"}
-            >
-              {soundEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
-            </button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button 
+                    onClick={handleToggleSound}
+                    className="text-gray-400 hover:text-white transition-colors"
+                    aria-label={soundEnabled ? "Disable sound" : "Enable sound"}
+                  >
+                    {soundEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{soundEnabled ? "Disable sound" : "Enable sound"}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button 
+                    onClick={handleDownloadSounds}
+                    className="text-gray-400 hover:text-white transition-colors"
+                    aria-label="Download sound files"
+                  >
+                    <Download className="h-5 w-5" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Download sound files</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           
           {/* Mobile menu button */}
@@ -166,6 +204,14 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
                 aria-label={soundEnabled ? "Disable sound" : "Enable sound"}
               >
                 {soundEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+              </button>
+              
+              <button 
+                onClick={handleDownloadSounds}
+                className="text-gray-400"
+                aria-label="Download sound files"
+              >
+                <Download className="h-5 w-5" />
               </button>
             </div>
           </div>

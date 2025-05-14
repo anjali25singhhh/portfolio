@@ -7,6 +7,8 @@ type SoundContextType = {
   soundEnabled: boolean;
   toggleSound: () => void;
   playSound: (soundName: string) => void;
+  downloadSounds: () => void;
+  isSoundsLoaded: boolean;
 };
 
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
@@ -25,7 +27,11 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
 
   // Load sounds on mount
   useEffect(() => {
-    const loadSounds = async () => {
+    loadSounds();
+  }, []);
+
+  const loadSounds = async () => {
+    try {
       // Create base URL for sounds
       const baseUrl = window.location.origin;
       
@@ -39,10 +45,30 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
       
       setSoundsLoaded(true);
       console.log('Sounds loaded successfully');
-    };
+    } catch (error) {
+      console.error('Failed to load sounds:', error);
+      toast.error('Failed to load sounds');
+    }
+  };
 
-    loadSounds();
-  }, []);
+  const downloadSounds = () => {
+    const sounds = [
+      { name: 'click.mp3', url: 'https://assets.mixkit.co/sfx/preview/mixkit-mouse-click-close-1113.mp3' },
+      { name: 'hover.mp3', url: 'https://assets.mixkit.co/sfx/preview/mixkit-interface-option-select-2573.mp3' },
+      { name: 'success.mp3', url: 'https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3' },
+      { name: 'notification.mp3', url: 'https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3' }
+    ];
+
+    sounds.forEach(sound => {
+      const a = document.createElement('a');
+      a.href = sound.url;
+      a.download = sound.name;
+      a.target = '_blank';
+      a.click();
+    });
+
+    toast.success('Sound files downloading. Place them in your /public/sounds/ folder');
+  };
 
   const toggleSound = () => {
     if (!soundsLoaded && !soundEnabled) {
@@ -70,7 +96,13 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <SoundContext.Provider value={{ soundEnabled, toggleSound, playSound }}>
+    <SoundContext.Provider value={{ 
+      soundEnabled, 
+      toggleSound, 
+      playSound, 
+      downloadSounds,
+      isSoundsLoaded: soundsLoaded 
+    }}>
       {children}
     </SoundContext.Provider>
   );
