@@ -30,6 +30,15 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
     playSound('click');
     downloadSounds();
   };
+  const handleDownloadResume = () => {
+    playSound('click');
+    const link = document.createElement('a');
+    link.href = '/Anjali_Singh_Resume.pdf'; // path relative to public
+    link.download = 'resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const handleLinkClick = () => {
     playSound('click');
@@ -134,21 +143,22 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
             </TooltipProvider>
             
             <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button 
-                    onClick={handleDownloadSounds}
-                    className="text-gray-400 hover:text-white transition-colors"
-                    aria-label="Download sound files"
-                  >
-                    <Download className="h-5 w-5" />
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Download sound files</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <button 
+        onClick={handleDownloadResume}
+        className="text-gray-400 hover:text-white transition-colors"
+        aria-label="Download resume"
+      >
+        <Download className="h-5 w-5" />
+      </button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Download Resume</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+
           </div>
           
           {/* Mobile menu button */}

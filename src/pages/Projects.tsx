@@ -10,7 +10,7 @@ interface Project {
   tech: string[];
   image: string;
   githubUrl: string;
-  liveUrl: string;
+  // liveUrl: string;
   featured: boolean;
 }
 
@@ -177,7 +177,7 @@ const Projects = () => {
                         <Github className="h-4 w-4" />
                       </a>
                       <a 
-                        href={project.liveUrl} 
+                        href={project.githubUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="p-2 rounded-md border border-dark-border hover:border-neon-purple text-gray-400 hover:text-white transition-colors"
@@ -187,7 +187,7 @@ const Projects = () => {
                     </div>
                     
                     <a 
-                      href={project.liveUrl} 
+                      href={project.githubUrl} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="flex items-center text-sm text-neon-purple hover:underline"
