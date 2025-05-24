@@ -13,6 +13,7 @@ import Experience from "./pages/Experience";
 import Testimonials from "./pages/Testimonials";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import SoundDemo from './pages/SoundDemo';
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,8 @@ const App = () => (
               <Route path="testimonials" element={<Testimonials />} />
               <Route path="contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="sound-demo" element={<SoundDemo />} />
+
             </Route>
           </Routes>
         </BrowserRouter>

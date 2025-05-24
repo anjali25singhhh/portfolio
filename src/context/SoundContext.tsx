@@ -42,7 +42,8 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
         audioManager.loadSound('success', `${baseUrl}/sounds/success.mp3`),
         audioManager.loadSound('notification', `${baseUrl}/sounds/notification.mp3`)
       ]);
-      
+      console.log(`${baseUrl}/sounds/click.mp3`);
+
       setSoundsLoaded(true);
       console.log('Sounds loaded successfully');
     } catch (error) {
@@ -53,10 +54,10 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
 
   const downloadSounds = () => {
     const sounds = [
-      { name: 'click.mp3', url: 'https://assets.mixkit.co/sfx/preview/mixkit-mouse-click-close-1113.mp3' },
-      { name: 'hover.mp3', url: 'https://assets.mixkit.co/sfx/preview/mixkit-interface-option-select-2573.mp3' },
-      { name: 'success.mp3', url: 'https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3' },
-      { name: 'notification.mp3', url: 'https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3' }
+      { name: 'click.mp3', url: 'cyber-port-nexus/public/sound/click.mp3' },
+      { name: 'hover.mp3', url: 'C:/Users/ASUS/Desktop/portfolio/cyber-port-nexus/public/sound/hover1.mp3' },
+      { name: 'success.mp3', url: 'cyber-port-nexus/public/sound/success.mp3' },
+      { name: 'notification.mp3', url: 'cyber-port-nexus/public/sound/notification.mp3' }
     ];
 
     sounds.forEach(sound => {

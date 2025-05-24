@@ -17,35 +17,35 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "NEURAL DASHBOARD",
-    description: "AI-powered analytics platform with real-time data visualization and predictive insights for business intelligence.",
-    tech: ["React", "TypeScript", "Node.js", "TensorFlow", "D3.js"],
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    title: "WEDEASE– Indian Wedding Marketplace",
+    description: "Wedease is a full-stack Indian wedding marketplace to book venues, catering, decor, and photography. Vendors can list services with photos, price, and location. Includes real-time location search",
+    tech: ["React", "TypeScript", "Node.js", "Tailwind CSS", "PostgreSQL", "Razorpay"],
+    image: "/portfilio_img.jpg",
+    githubUrl: "https://github.com/anjali25singhhh/WedEase",
+    
     featured: true
   },
   {
     id: 2,
-    title: "QUANTUM COMMERCE",
-    description: "Next-gen e-commerce platform with AI recommendation engine and blockchain payment processing.",
-    tech: ["Next.js", "GraphQL", "MongoDB", "Stripe", "AWS"],
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    title: "Ai-powered Crop Disease Detection",
+    description: "A deep learning-based web API that detects crop diseases from images, provides diagnosis and treatment advice, offers Grad-CAM explainability, and supports feedback for mislabeled data.",
+    tech: ["Python","Next.js","HTML/CSS","JavaScript", "OpenCV", "MongoDB", "Flask", "REST API"],
+    image: "/ai_crop_img.jpg",
+    githubUrl: "https://github.com/anjali25singhhh/crop_disease_detection",
+    
     featured: true
   },
   {
     id: 3,
-    title: "ORBITAL CMS",
-    description: "Headless CMS with intuitive interface and API-first architecture for modern content management.",
-    tech: ["Vue.js", "Express", "PostgreSQL", "Redis", "Docker"],
-    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    title: "Driver Drowsiness Detection System",
+    description: "A real-time safety system that uses computer vision to detect signs of driver fatigue by analyzing eye blinks and facial landmarks. If drowsiness is detected, an alarm alerts the driver to prevent accidents.",
+    tech: ["Python", "OpenCV", "imutils", "Dlib", "SciPy"],
+    image: "/d3-alert.png",
     githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    
     featured: false
   },
-  {
+ /* {
     id: 4,
     title: "NEXUS CHAT",
     description: "Real-time messaging platform with end-to-end encryption and AI-powered moderation.",
@@ -54,8 +54,8 @@ const projects: Project[] = [
     githubUrl: "https://github.com",
     liveUrl: "https://example.com",
     featured: false
-  },
-  {
+  },*/
+ /* {
     id: 5,
     title: "CYBERSPHERE",
     description: "Immersive 3D visualization platform for data exploration in virtual reality environment.",
@@ -64,15 +64,15 @@ const projects: Project[] = [
     githubUrl: "https://github.com",
     liveUrl: "https://example.com",
     featured: false
-  },
+  },*/
   {
     id: 6,
-    title: "STELLAR API",
-    description: "Microservices framework with service discovery, load balancing, and real-time metrics.",
-    tech: ["Go", "gRPC", "Kubernetes", "Prometheus", "Grafana"],
-    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    title: "GulpNGo- Food Delivery",
+    description: "A responsive web platform where users can browse restaurants, order food online, track deliveries, and make secure payments. Admins can manage orders, menus, and delivery updates.",
+    tech: ["Node.js", "Express.js", "JavaScript", "MongoDB", "React", "HTML", " Tailwind CSS", "Google Maps API","Firebase Authentication"],
+      image: "/gulpngo_logo.png",
+    githubUrl: "https://github.com/anjali25singhhh/GulpnGo-A-food-delivery-app",
+    
     featured: false
   }
 ];
@@ -141,13 +141,15 @@ const Projects = () => {
                     : 'border-dark-border'
                 }`}
               >
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
+               <div className="h-48 bg-black flex items-center justify-center overflow-hidden">
+  <img 
+    src={project.image} 
+    alt={project.title} 
+    className="max-w-full max-h-full object-contain"
+  />
+</div>
+
+                
                 
                 <div className="p-6">
                   <h3 className="text-xl font-orbitron text-white mb-2">{project.title}</h3>

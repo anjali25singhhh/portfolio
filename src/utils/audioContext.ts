@@ -22,7 +22,7 @@ class AudioManager {
       this.context = new (window.AudioContext || (window as any).webkitAudioContext)();
       this.gainNode = this.context.createGain();
       this.gainNode.connect(this.context.destination);
-      this.gainNode.gain.value = 0.5; // Default volume
+      this.gainNode.gain.value = 1; // Default volume
     }
     return this.context;
   }
@@ -40,20 +40,35 @@ class AudioManager {
       console.error(`Error loading sound ${name}:`, error);
       return false;
     }
+    console.error(`Error loading sound ${name} from ${url}:`, error);
+
   }
 
   playSound(name: string) {
-    if (!this.enabled || !this.context || !this.sounds[name]) return;
-    
-    try {
-      const source = this.context.createBufferSource();
-      source.buffer = this.sounds[name];
-      source.connect(this.gainNode!);
-      source.start(0);
-    } catch (error) {
-      console.error(`Error playing sound ${name}:`, error);
-    }
+  if (!this.enabled) {
+    console.log('Sound is disabled');
+    return;
   }
+  if (!this.context) {
+    console.log('AudioContext not initialized');
+    return;
+  }
+  if (!this.sounds[name]) {
+    console.log(`Sound ${name} not loaded`);
+    return;
+  }
+  console.log(`Playing sound: ${name}`);
+  
+  try {
+    const source = this.context.createBufferSource();
+    source.buffer = this.sounds[name];
+    source.connect(this.gainNode!);
+    source.start(0);
+  } catch (error) {
+    console.error(`Error playing sound ${name}:`, error);
+  }
+}
+
 
   toggleSound(enabled: boolean) {
     this.enabled = enabled;

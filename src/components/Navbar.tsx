@@ -21,7 +21,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
   const [hidden, setHidden] = useState(false);
   const location = useLocation();
   const { soundEnabled, toggleSound, playSound, downloadSounds, isSoundsLoaded } = useSoundContext();
-
+  
   const handleToggleSound = () => {
     toggleSound();
   };
@@ -70,8 +70,8 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
     { name: "HOME", path: "/" },
     { name: "PROJECTS", path: "/projects" },
     { name: "SKILLS", path: "/skills" },
-    { name: "EXPERIENCE", path: "/experience" },
-    { name: "TESTIMONIALS", path: "/testimonials" },
+   /* { name: "EXPERIENCE", path: "/experience" },*/
+   /* { name: "TESTIMONIALS", path: "/testimonials" },*/
     { name: "CONTACT", path: "/contact" },
   ];
 
@@ -88,7 +88,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
             className="text-xl sm:text-2xl font-orbitron font-bold tracking-wider text-white text-glow"
             onClick={handleLinkClick}
           >
-            DEV<span className="text-neon-blue">PORTFOLIO</span>
+            <span className="text-neon-blue">PORTFOLIO</span>
           </NavLink>
           
           {/* Desktop Navigation */}
@@ -114,13 +114,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
           
           {/* Action buttons */}
           <div className="hidden md:flex items-center ml-4 space-x-4">
-            <button 
-              onClick={handleCommandPalette}
-              className="flex items-center text-sm text-gray-400 hover:text-white transition-colors"
-            >
-              <Keyboard className="h-4 w-4 mr-1" />
-              <span>Cmd+K</span>
-            </button>
+            
             
             <TooltipProvider>
               <Tooltip>
@@ -190,13 +184,7 @@ const Navbar = ({ openCommandPalette }: NavbarProps) => {
             ))}
             
             <div className="flex items-center justify-between pt-2 mt-2 border-t border-dark-border">
-              <button 
-                onClick={handleCommandPalette}
-                className="flex items-center text-sm text-gray-400"
-              >
-                <Keyboard className="h-4 w-4 mr-1" />
-                <span>Cmd+K</span>
-              </button>
+           
               
               <button 
                 onClick={handleToggleSound}

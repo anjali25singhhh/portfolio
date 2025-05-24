@@ -34,7 +34,7 @@ const experienceData: ExperienceItem[] = [
       "Implemented state management with Redux and RTK Query, optimizing performance for complex data flows",
       "Collaborated with UX/UI team to implement design systems and component libraries"
     ],
-    technologies: ["React", "TypeScript", "Redux", "Tailwind CSS", "Jest", "Figma"]
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Figma"]
   },
   {
     id: 3,

@@ -11,20 +11,20 @@ interface Skill {
 }
 
 const skills: Skill[] = [
-  { name: "React", level: 90, description: "Building responsive, state-driven UIs with modern React patterns", category: "frontend" },
-  { name: "TypeScript", level: 85, description: "Type-safe development with advanced TypeScript features", category: "frontend" },
+  { name: "React", level: 80, description: "Building responsive, state-driven UIs with modern React patterns", category: "frontend" },
+  { name: "TypeScript", level: 75, description: "Type-safe development with advanced TypeScript features", category: "frontend" },
   { name: "Node.js", level: 80, description: "Server-side JavaScript with Express and RESTful APIs", category: "backend" },
-  { name: "Next.js", level: 85, description: "Server-side rendering and static site generation", category: "frontend" },
+  { name: "Next.js", level: 75, description: "Server-side rendering and static site generation", category: "frontend" },
   { name: "MongoDB", level: 75, description: "Document-based NoSQL database design and optimization", category: "backend" },
   { name: "PostgreSQL", level: 70, description: "Relational database design and complex queries", category: "backend" },
-  { name: "GraphQL", level: 75, description: "Query language for APIs and runtime for fulfilling queries", category: "backend" },
-  { name: "Redux", level: 80, description: "State management for complex React applications", category: "frontend" },
-  { name: "Tailwind CSS", level: 90, description: "Utility-first CSS framework for rapid UI development", category: "frontend" },
-  { name: "Docker", level: 65, description: "Containerization of applications for consistent deployment", category: "devops" },
-  { name: "AWS", level: 70, description: "Cloud infrastructure design and deployment", category: "devops" },
-  { name: "CI/CD", level: 75, description: "Automated testing and deployment pipelines", category: "devops" },
+  { name: "GraphQL", level: 65, description: "Query language for APIs and runtime for fulfilling queries", category: "backend" },
+  /*{ name: "Redux", level: 80, description: "State management for complex React applications", category: "frontend" },*/
+  { name: "Tailwind CSS", level: 75, description: "Utility-first CSS framework for rapid UI development", category: "frontend" },
+  /*{ name: "Docker", level: 65, description: "Containerization of applications for consistent deployment", category: "devops" },*/
+  { name: "AWS", level: 60, description: "Cloud infrastructure design and deployment", category: "devops" },
+ /* { name: "CI/CD", level: 75, description: "Automated testing and deployment pipelines", category: "devops" },*/
   { name: "Git", level: 85, description: "Version control and collaborative development", category: "tools" },
-  { name: "Jest", level: 80, description: "JavaScript testing framework for unit and integration tests", category: "tools" },
+  /*{ name: "Jest", level: 80, description: "JavaScript testing framework for unit and integration tests", category: "tools" },*/
   { name: "Figma", level: 70, description: "UI/UX design and prototyping", category: "tools" },
   { name: "Python", level: 65, description: "Data analysis and automation scripts", category: "backend" },
 ];

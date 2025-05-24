@@ -7,10 +7,11 @@ import AnimatedSection from '@/components/AnimatedSection';
 import HackerEffect from '@/components/HackerEffect';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 
+
 const Home = () => {
   const navigate = useNavigate();
   const [typedText, setTypedText] = useState("");
-  const fullText = "FULL STACK ENGINEER ∞ FUTURE-READY";
+  const fullText = "FULL STACK WEB DEVELOPER ∞ FUTURE-READY";
   
   useEffect(() => {
     let i = 0;
@@ -34,11 +35,11 @@ const Home = () => {
             <span className="absolute inset-0 rounded-full bg-neon-blue animate-pulse"></span>
             <span className="absolute inset-0 rounded-full bg-neon-blue opacity-60 animate-[pulse-ring_1.5s_cubic-bezier(0.25,0.46,0.45,0.94)_infinite]"></span>
           </span>
-          <HackerEffect text="LAUNCH SEQUENCE INITIATED" duration={1000} />
+          <HackerEffect text="Enthusiastic Developer" duration={1000} />
         </h2>
         
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-orbitron font-bold mb-6 tracking-tight text-glow">
-          JOHN <span className="text-gradient">DOE</span>
+          ANJALI <span className="text-gradient">SINGH</span>
         </h1>
         
         <div className="h-8 sm:h-10">
@@ -48,8 +49,7 @@ const Home = () => {
         </div>
         
         <p className="mt-8 max-w-2xl mx-auto text-gray-400 text-sm sm:text-base leading-relaxed">
-          Architecting the future through clean code and innovative solutions. 
-          Specializing in scalable web applications with cutting-edge technologies.
+          "Energetic developer with a deep curiosity for technology and a sharp eye for detail. I bring ideas to life through code, with a focus on performance, aesthetics, and user experience."
         </p>
         
         <div className="mt-8">
@@ -67,13 +67,21 @@ const Home = () => {
             <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </button>
           
-          <button className="flex items-center gap-2 px-6 py-3 bg-dark-lighter border border-dark-border rounded-md font-medium text-white hover:bg-white/5 transition-colors hover:border-neon-purple group">
-            <FileText className="h-5 w-5 group-hover:text-neon-purple transition-colors" />
-            DOWNLOAD RESUME
-          </button>
+          <a
+  href="/Anjali_Singh_Resume.pdf"
+  download
+  className="flex items-center gap-2 px-6 py-3 bg-dark-lighter border border-neon-purple rounded-md font-medium text-white hover:bg-neon-purple/10 transition-colors group relative overflow-hidden scan-line"
+>
+  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-neon-blue to-neon-purple opacity-0 group-hover:opacity-20 transition-opacity"></span>
+  <FileText className="h-5 w-5 group-hover:text-neon-purple transition-colors" />
+  DOWNLOAD RESUME
+</a>
+
+
+
         </div>
-      </div>
-      
+      </div>  
+
       {/* GitHub Stats */}
       <AnimatedSection className="mt-12 pt-8 border-t border-dark-border" delay={300}>
         <h3 className="text-center text-lg sm:text-xl font-orbitron text-white mb-6 relative inline-flex items-center">
@@ -86,7 +94,7 @@ const Home = () => {
           <div className="futuristic-panel skill-card scan-line">
             <h4 className="text-xs uppercase text-gray-500 tracking-wider mb-2">Contribution Level</h4>
             <div className="flex items-center justify-between">
-              <div className="text-xl font-bold text-white">862 commits</div>
+              <div className="text-xl font-bold text-white">100 commits</div>
               <Github className="h-4 w-4 text-neon-blue" />
             </div>
             <div className="mt-4 bg-dark-border h-2 rounded-full overflow-hidden">
@@ -99,15 +107,15 @@ const Home = () => {
             <h4 className="text-xs uppercase text-gray-500 tracking-wider mb-2">Popular Repositories</h4>
             <ul className="space-y-2">
               <li className="flex items-center justify-between text-sm">
-                <span className="text-white">AI-ProjectManager</span>
+                <span className="text-white">Crop_Disease_Detection</span>
                 <span className="text-neon-blue flex items-center"><Star size={14} className="mr-1" /> 48</span>
               </li>
               <li className="flex items-center justify-between text-sm">
-                <span className="text-white">React-Dashboard</span>
+                <span className="text-white">WedEase </span>
                 <span className="text-neon-blue flex items-center"><Star size={14} className="mr-1" /> 36</span>
               </li>
               <li className="flex items-center justify-between text-sm">
-                <span className="text-white">NextJS-Portfolio</span>
+                <span className="text-white">Driver_drowsiness_detection_system</span>
                 <span className="text-neon-blue flex items-center"><Star size={14} className="mr-1" /> 24</span>
               </li>
             </ul>
@@ -116,7 +124,7 @@ const Home = () => {
           <div className="futuristic-panel skill-card scan-line">
             <h4 className="text-xs uppercase text-gray-500 tracking-wider mb-2">Tech Stack</h4>
             <div className="flex flex-wrap gap-2 mt-2">
-              {["TypeScript", "React", "Node.js", "MongoDB", "Python", "AWS"].map((tech) => (
+              {["TypeScript", "React","Next.js", "Node.js", "MongoDB", "Python", "AWS", "c++", "HTML", "CSS", "Express.js", "GitHub", "PostgreSQL" ].map((tech) => (
                 <span 
                   key={tech} 
                   className="px-2 py-1 text-xs bg-dark-lighter border border-dark-border rounded-md text-gray-300 hover:border-neon-blue hover:text-white transition-colors"
@@ -184,16 +192,14 @@ const Home = () => {
       <AnimatedSection className="mt-20" delay={900}>
         <div className="cyber-line"></div>
         <h3 className="text-center text-lg sm:text-xl font-orbitron text-white mb-8">
-          FEATURED PROJECT
+          
         </h3>
         
         <div className="bg-dark-card border border-dark-border rounded-lg overflow-hidden hover:border-neon-blue transition-all duration-300 skill-card">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-6">
-              <h4 className="text-xl font-orbitron text-white mb-2">AI-ProjectManager</h4>
-              <p className="text-gray-400 mb-4">
-                An intelligent project management system that leverages machine learning to optimize task allocation and project timelines.
-              </p>
+              <h4 className="text-xl font-orbitron text-white mb-2"></h4>
+              
               
               <div className="mb-4">
                 <h5 className="text-xs uppercase text-gray-500 tracking-wider mb-2">Tech Stack</h5>
@@ -210,23 +216,8 @@ const Home = () => {
               </div>
               
               <div className="flex space-x-4">
-                <button className="px-4 py-2 bg-dark-lighter border border-neon-blue rounded-md text-white text-sm hover:bg-neon-blue/10 transition-colors">
-                  View Project
-                </button>
-                <button className="px-4 py-2 bg-dark-lighter border border-dark-border rounded-md text-white text-sm hover:bg-white/5 transition-colors">
-                  <Github className="h-4 w-4 inline mr-1" /> Repository
-                </button>
+              
               </div>
-            </div>
-            
-            <div className="bg-dark-lighter p-4">
-              <AspectRatio ratio={16/9} className="bg-dark-card rounded-md overflow-hidden border border-dark-border">
-                <div className="w-full h-full bg-gradient-to-br from-dark-card via-dark-lighter to-dark-card flex items-center justify-center">
-                  <div className="text-neon-blue p-4 border border-neon-blue rounded-md animate-pulse">
-                    <span className="font-mono text-sm">PROJECT PREVIEW</span>
-                  </div>
-                </div>
-              </AspectRatio>
             </div>
           </div>
         </div>
